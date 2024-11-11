@@ -5,29 +5,104 @@
     <title>All Tasks</title>
     <style>
         /* Basic styling for the nav bar */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
         nav {
-            background-color: #f8f9fa;
-            padding: 10px;
+            background-color: #007bff;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .nav-link {
             margin: 0 10px;
             text-decoration: none;
-            color: #007bff;
+            color: #fff;
+            font-weight: 500;
         }
+
         .nav-link:hover {
             text-decoration: underline;
         }
+
         .welcome-message {
             font-size: 1.1em;
-            font-weight: bold;
-            color: #333;
-            background-color: #e0f7fa;
+            color: #fff;
+            background-color: rgba(0, 123, 255, 0.2);
             padding: 5px 10px;
             border-radius: 5px;
             display: inline-block;
+        }
+
+        /* Page content styling */
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Action links styling */
+        td a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        td a:hover {
+            text-decoration: underline;
+        }
+
+        /* Create new task button */
+        .create-task {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .create-task:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -69,6 +144,6 @@
         </td>
     </tr>
 </table>
-<a href="/tasks/new">Create New Task</a>
+<a href="/tasks/new" class="create-task">Create New Task</a>
 </body>
 </html>

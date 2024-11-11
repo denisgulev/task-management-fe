@@ -1,11 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Error Page</title>
+    <style>
+        /* Basic page styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Error message container styling */
+        .error-container {
+            text-align: center;
+            padding: 20px 40px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #dc3545;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        /* Back to homepage link styling */
+        .home-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .home-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-<h1>Error</h1>
-<p th:text="${errorMessage}"></p>
-<a href="/">Go back to homepage</a>
+<div class="error-container">
+    <h1>Error</h1>
+    <p th:text="${errorMessage}">An unexpected error occurred. Please try again later.</p>
+    <a href="/" class="home-link">Go back to homepage</a>
+</div>
 </body>
 </html>

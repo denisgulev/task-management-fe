@@ -3,22 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Task</title>
+    <style>
+        /* Form container for editing and creating tasks */
+        .form-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-container h1 {
+            color: #007bff;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* Form layout and input styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+        }
+
+        input[type="text"],
+        select {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* Submit button styling */
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Back link styling */
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-<h1>Create Task</h1>
-<form action="/tasks" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required /><br/>
-    <label for="description">Description:</label>
-    <input type="text" id="description" name="description" required /><br/>
-    <label for="priority">Priority:</label>
-    <select id="priority" name="priority">
-        <option th:value="High">High</option>
-        <option th:value="Medium">Medium</option>
-        <option th:value="Low">Low</option>
-    </select><br/>
-    <button type="submit">Submit</button>
-</form>
-<a href="/tasks">Back to All Tasks</a>
+<div class="form-container">
+    <h1>Create Task</h1>
+    <form action="/tasks" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required />
+
+        <label for="priority">Priority:</label>
+        <select id="priority" name="priority">
+            <option th:value="High">High</option>
+            <option th:value="Medium">Medium</option>
+            <option th:value="Low">Low</option>
+        </select>
+
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+    <a href="/tasks" class="back-link">Back to All Tasks</a>
+</div>
 </body>
 </html>
