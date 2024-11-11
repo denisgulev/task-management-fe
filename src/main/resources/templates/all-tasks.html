@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Tasks</title>
+    <style>
+        /* Basic styling for the nav bar */
+        nav {
+            background-color: #f8f9fa;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-link {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .welcome-message {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            background-color: #e0f7fa;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation bar with Login/Logout options -->
+<nav>
+    <div>
+        <a href="/" class="nav-link">Home</a>
+        <a href="/tasks" class="nav-link">All Tasks</a>
+    </div>
+    <div>
+        <!-- Conditionally display Login or Logout based on loggedIn status -->
+        <span th:if="${loggedIn}" class="welcome-message">Welcome, <span th:text="${username}">User</span></span>
+        <a th:if="${!loggedIn}" href="/login" class="nav-link">Login</a>
+        <a th:if="${loggedIn}" href="/logout" class="nav-link">Logout</a>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<h1>All Tasks</h1>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Priority</th>
+        <th>Actions</th>
+    </tr>
+    <!--  entry is a Pair object  -->
+    <tr th:each="entry : ${tasksWithUrls}">
+        <td th:text="${entry.first.id}"></td>
+        <td th:text="${entry.first.name}"></td>
+        <td th:text="${entry.first.description}"></td>
+        <td th:text="${entry.first.priority}"></td>
+        <td>
+            <a th:href="${entry.second.viewUrl}">View</a>
+            <a th:href="${entry.second.editUrl}">Edit</a>
+            <a th:href="${entry.second.deleteUrl}">Delete</a>
+        </td>
+    </tr>
+</table>
+<a href="/tasks/new">Create New Task</a>
+</body>
+</html>

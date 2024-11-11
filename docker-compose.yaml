@@ -1,0 +1,69 @@
+services:
+  task-management:
+    image: dman93/task-management:latest
+    depends_on:
+      db_mongo:
+        condition: service_started
+    ports:
+      - "8081:8080"
+    environment:
+      - DB_TYPE=${DB_TYPE}
+      - DB_URL=${DB_URL}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+
+  user-management:
+      image: dman93/user-management:latest
+      depends_on:
+          db_mongo:
+              condition: service_started
+      ports:
+          - "8082:8080"
+      environment:
+          - DB_TYPE=${DB_TYPE}
+          - DB_URL=${DB_URL}
+          - DB_USER=${DB_USER}
+          - DB_PASSWORD=${DB_PASSWORD}
+          - DB_NAME=${DB_NAME}
+
+#  ktor_app:
+#    build:
+#      context: .
+#    depends_on:
+#      - web1
+#      - web2
+#    ports:
+#      - "8083:8080"  # Adjust as needed for your app's exposed port
+#    environment:
+#      - TASK_SERVICE_URL=http://web1:8081
+#      - USER_SERVICE_URL=http://web2:8082
+
+  task-management-fe:
+    image: task-management-fe:1.0
+    depends_on:
+      - task-management
+      - user-management
+    ports:
+      - "8083:8080"  # Adjust as needed for your app's exposed port
+    environment:
+      - TASK_SERVICE_URL=${TASK_SERVICE_URL}
+      - USER_SERVICE_URL=${USER_SERVICE_URL}
+
+  db_mongo:
+    image: mongo
+    volumes:
+      - mongodata:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "mongo --eval 'db.runCommand({ping: 1})'" ]
+      interval: 1s
+      retries: 30
+
+volumes:
+  mongodata:
